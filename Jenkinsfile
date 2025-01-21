@@ -22,25 +22,16 @@ pipeline {
                 sh '''
                     # Switch to bash
                     bash -c "
-                    sudo apt install python3 python3-pip python3-venv -y
-                    sudo apt install python3 python3-pip -y
                     python3 -m venv venv &&
                     source venv/bin/activate &&
                     pip install --upgrade pip &&
-                    pip3 install flask
                     pip install -r requirements.txt &&
-                    rm -rf ~/app/venv
-                    python3 -m venv ~/app/venv
-                    source ~/app/venv/bin/activate
-                    pip install --upgrade pip
-                    pip install flask
                     pip install pytest &&
                     pytest
                     "
                 '''
             }
         }
-
         stage('Deploy to EC2') {
             steps {
                 echo "Deploying application to EC2 instance: ${env.HOST} as ${env.USER}"
