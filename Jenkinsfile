@@ -29,6 +29,11 @@ pipeline {
                     pip install --upgrade pip &&
                     pip3 install flask
                     pip install -r requirements.txt &&
+                    rm -rf ~/app/venv
+                    python3 -m venv ~/app/venv
+                    source ~/app/venv/bin/activate
+                    pip install --upgrade pip
+                    pip install flask
                     pip install pytest &&
                     pytest
                     "
